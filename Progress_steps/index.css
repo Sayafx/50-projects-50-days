@@ -33,6 +33,9 @@ body {
     width: 350px;
 }
 
+/* 进度条底色，*/
+/* ::before 伪元素相当于在 .progress-container 内部但视觉上放在底部 添加了一条线（即进度条的背景）。 */
+/* 这样，真正的 .progress 进度条只需要改变宽度即可，不会影响整体布局。*/ 
 .progress-container::before {
     content: '';
     background-color: var(--inline-border-empty);
@@ -45,6 +48,7 @@ body {
     z-index: -1;
 }
 
+/* 进度条 */
 .progress {
     background-color: var(--inline-border-fill);
     position: absolute;
@@ -70,6 +74,7 @@ body {
     transition: 0.4s ease;
 }
 
+/* 激活的 circle 样式 */
 .circle.active{
     border-color: var(--inline-border-fill);
 }
