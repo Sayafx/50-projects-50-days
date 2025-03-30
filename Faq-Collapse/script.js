@@ -1,17 +1,11 @@
-const btn = document.querySelectorAll('.faq-toggle')
-// const btnOpen = document.getElementsByClassName('.fa-chevron-down')
-// const btnClose = document.getElementsByClassName('.fa-times')
 const faqs = document.querySelectorAll('.faq')
 
-console.log(faqs)
-console.log(btn)
+faqs.forEach(faq => {
+    const btn = faq.querySelector('.faq-toggle')
+    const closeBtn = faq.querySelector('.fa-times')
+    const openBtn = faq.querySelector('.fa-chevron-down')
 
-// faqs.forEach(faq => {
-//     btn.addEventListener('click', () => {
-//         faq.classList.add('active')
-//     })
-// });
-
-// btn.addEventListener('click', () => {
-//     faq.classList.add('active')
-// })
+    btn.addEventListener('click', () => {
+        faq.classList.toggle('active')
+    })
+})
