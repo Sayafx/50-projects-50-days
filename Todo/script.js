@@ -3,6 +3,10 @@ let currentListId = 'myDayList'; // 默认显示"我的一天"
 
 
 // DOM元素
+const myDayListBtn = document.getElementById('myday-ls')
+const importantListBtn = document.getElementById('important-ls')
+const taskListBtn = document.getElementById('task-ls')
+
 const addTaskBtn = document.querySelector('.add-task-form .btn-add')
 const addTaskForm = document.querySelector('.add-task-form')
 const addTaskInput = document.querySelector('.add-task-form .input')
@@ -54,7 +58,7 @@ function renderTasks() {
     //获取当前列表的任务并添加DOM
     const currentListTasks = Object.values(todoData.tasks)
         .filter(task => task.listIds && task.listIds.includes(todoData.currentListId))
-    console.log(currentListTasks)
+    // console.log(currentListTasks)
     currentListTasks.forEach(task => {
         renderTaskDom(task)
     })
@@ -168,6 +172,10 @@ function addNewTask(taskName) {
     addTaskInput.focus(); //输入框自动聚焦
 
 }
+
+// ========== 切换任务列表 ==========
+
+
 
 
 //初始化应用

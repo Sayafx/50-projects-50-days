@@ -163,6 +163,12 @@ ul {
 
 }
 
+.fa-check:hover {
+    color: #767678;
+    -webkit-text-stroke: 1px #767678; /* 宽度+颜色 */
+    text-stroke: 1px #767678; /* 标准写法 */
+}
+
 .task-name {
     display: inline-block;
     font-size: 0.8rem;
