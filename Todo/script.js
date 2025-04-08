@@ -3,9 +3,12 @@ let currentListId = 'myDayList'; // 默认显示"我的一天"
 
 
 // DOM元素
-const myDayListBtn = document.getElementById('myday-ls')
-const importantListBtn = document.getElementById('important-ls')
-const taskListBtn = document.getElementById('task-ls')
+const myDayListBtn = document.getElementById('myDayList')
+const importantListBtn = document.getElementById('importantList')
+const taskListBtn = document.getElementById('tasksList')
+
+const defaultLists = document.querySelector('.default-lists')
+const userLists = document.querySelector('.user-lists')
 
 const addTaskBtn = document.querySelector('.add-task-form .btn-add')
 const addTaskForm = document.querySelector('.add-task-form')
@@ -20,9 +23,11 @@ const undoneList = document.getElementById('undone-ls')
 const defaultData = { 
     currentListId: 'myDayList',
     lists: {
-        myDayList: { name: '我的一天', type: 'default'},
-        importantList: { name: '重要', type: 'default'},
-        tasksList: { name: '任务', type: 'default'},
+        myDayList: { listId:'myDayList', title: '我的一天', type: 'default'},
+        importantList: { listId:'importantList', title: '重要', type: 'default'},
+        tasksList: { listId:'tasksList', title: '任务', type: 'default'},
+        newList: { listId:'list-' + Date.now(), title: '自定义列表', type: 'user'},
+        newList2: { listId:'list-2' + Date.now(), title: '自定义列表2', type: 'user'},
     },
     tasks: {}
 }
@@ -175,7 +180,32 @@ function addNewTask(taskName) {
 
 // ========== 切换任务列表 ==========
 
+//渲染侧边栏列表
 
+function renderLists() {
+    //清除任务列表
+    userLists.innerHTML = ``
+
+    //获取列表,并添加DOM
+    const Lists = Object.values(todoData.lists)
+        .filter(list => list.type && list.type.includes('user'))
+    console.log(Lists)
+    Lists.forEach(list => {
+        renderListDom(list)
+    })
+}
+
+function renderListDom(list) {
+    const li = document.createElement('li')
+    li.dataset.id = list.listId
+    li.className = 'user-ls'
+    li.innerHTML = `
+            ${list.title}
+    `
+    userLists.appendChild(li)
+    return li
+
+}
 
 
 //初始化应用
