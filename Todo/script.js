@@ -1,5 +1,5 @@
 let todoData
-let currentListId = 'myDayList'; // 默认显示"我的一天"
+let currentListId  // 默认显示"我的一天"
 
 
 // DOM元素
@@ -49,7 +49,7 @@ function loadData() {
 
 function init() {
     todoData = loadData()
-    currentListId = todoData.currentListId
+    // currentListId = todoData.currentListId
     renderTasks()
 }
 
@@ -63,10 +63,16 @@ function renderTasks() {
     //获取当前列表的任务并添加DOM
     const currentListTasks = Object.values(todoData.tasks)
         .filter(task => task.listIds && task.listIds.includes(todoData.currentListId))
-    // console.log(currentListTasks)
-    currentListTasks.forEach(task => {
-        renderTaskDom(task)
-    })
+    console.log(currentListTasks)
+    //没有匹配到，不渲染任务
+    if (!currentListTasks) return
+    // 匹配到任务，渲染任务
+        else{
+            currentListTasks.forEach(task => {
+                renderTaskDom(task)
+            })
+        }
+
 }
 
 function renderTaskDom(task) {
@@ -162,7 +168,7 @@ function addNewTask(taskName) {
         done: false,
         important: false,
         dueDate: null,
-        listIds: [currentListId, 'taskList'], // 添加到当前列表和总任务列表
+        listIds: [todoData.currentListId, 'tasksList'], // 添加到当前列表和总任务列表
         createdAt: new Date().toISOString(),
         doneAt: null
     }
@@ -170,6 +176,7 @@ function addNewTask(taskName) {
     todoData.tasks[newTask.id] = newTask
 
     renderTaskDom(newTask)
+    renderTasks()
 
     saveData();
 
